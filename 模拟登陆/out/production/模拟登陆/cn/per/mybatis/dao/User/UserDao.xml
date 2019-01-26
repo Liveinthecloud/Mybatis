@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.per.mybatis.dao.User.UserDao">
+    <!--<select id="findUserByUserNameAndPassword" parameterType="user" resultType="user" >-->
+        <!--select user_id userId,user_name userName,user_age userAge,password from user where user_name=#{userName}and password=#{password}-->
+    <!--</select>-->
+    <select id="findUserByUserNameAndPasswordDao" parameterType="user" resultMap="userMap" >
+        select * from user where user_name=#{userName}and password=#{password}
+    </select>
+    <resultMap id="userMap" type="user">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userAge" column="user_age"/>
+        <result property="password" column="password"/>
+    </resultMap>
+    <select id="findUserAndOrders" resultMap="userOrdersMap">
+        select user.* ,orders.*
+        from user
+        left join orders on user.user_id=orders.user_id;
+    </select>
+    <resultMap id="userOrdersMap" type="user">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userAge" column="user_age"/>
+        <result property="password" column="password"/>
+        <!--进行一对多的高级映射-->
+        <collection property="ordersList" ofType="orders">
+            <id property="ordersId" column="orders_id"/>
+            <result property="count" column="count"/>
+            <result property="status" column="status"/>
+        </collection>
+    </resultMap>
+</mapper>

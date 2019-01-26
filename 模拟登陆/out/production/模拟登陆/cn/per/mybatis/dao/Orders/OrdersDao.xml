@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.per.mybatis.dao.Orders.OrdersDao">
+
+<select id="findOrdersAndName" resultMap="ordersMap">
+
+    select orders.*,user.*
+    from orders,user
+    where orders.user_id=user.user_id
+</select>
+    <!--关于一对一的结果映射-->
+    <resultMap id="ordersMap" type="orders">
+        <id property="ordersId" column="orders_id"/>
+        <result property="count" column="count"/>
+        <result property="status" column="status"/>
+        <!--将结果集剩余字段封装映射到关联的pojo当中-->
+        <association property="user" javaType="user">
+            <id property="userId" column="user_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="userAge" column="user_age"/>
+            <result property="password" column="password"/>
+        </association>
+    </resultMap>
+</mapper>
