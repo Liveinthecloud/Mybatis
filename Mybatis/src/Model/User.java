@@ -4,6 +4,11 @@ public class User {
     private int id;
     private String uname;
     private int age;
+    public User(){}
+    public User(String uname,int age){
+        this.uname=uname;
+        this.age=age;
+    }
 
     public int getId() {
         return id;

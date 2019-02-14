@@ -21,6 +21,7 @@ public class demo_1 {
         //获取会话对象
         SqlSession sqlSession=factory.openSession();
         int id=5;
+        //通过user.xml换回对象B
         User user=(User) sqlSession.selectOne("Model.User.findUserById",id);
         System.out.println(user);
         sqlSession.close();

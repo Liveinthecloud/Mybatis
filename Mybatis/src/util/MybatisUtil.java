@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MybatisUtil {
+    //懒汉式单例模式
     private static SqlSessionFactory factory;
     static {
         //  获取配置文件

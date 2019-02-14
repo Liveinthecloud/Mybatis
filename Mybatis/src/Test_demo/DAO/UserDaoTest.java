@@ -1,4 +1,4 @@
-package Test_demo;
+package Test_demo.DAO;
 
 import Model.User;
 import dao.impl.UserDaoImpl;
@@ -9,13 +9,14 @@ public class UserDaoTest {
 
     public static void main(String[] arge){
         UserDaoImpl dao = new UserDaoImpl();
+        //通过id
         User userByID = dao.findUserByID(10);
-        System.out.println(userByID);
+        System.err.println(userByID);
 
         List<User> l = dao.findUserByName("王");
         for (User u:l
              ) {
-            System.out.println(u);
+            System.err.println(u);
         }
     }
 }

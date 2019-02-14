@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao {
     public User findUserByID(int id) {
         //数据库操作 获取会话
         SqlSession session= MybatisUtil.getFactory().openSession();
-        User o = session.selectOne("Model.User.findUserById", id);
+        User o = session.selectOne("dao.UserDao.findUserById", id);
         return o;
     }
 
@@ -32,4 +32,15 @@ public class UserDaoImpl implements UserDao {
         UserDao mapper = session.getMapper(UserDao.class);
         return mapper.findUserByName(name);
     }
+
+    @Override
+    public void addUser(User user) {
+        SqlSession session = MybatisUtil.getFactory().openSession();
+        UserDao mapper = session.getMapper(UserDao.class);
+        mapper.addUser(user);
+        //提交事务
+        session.commit();
+        session.close();
+    }
+
 }
